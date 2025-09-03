@@ -1028,12 +1028,6 @@ def stiefel_attivazioni(model_a, model_b, layer_names,valid_dl):
 
     return rotated_weight_b
 
-sm2=stiefel_attivazioni(model_a,model_b,layer_names,valid_loader3)
-
-_,_=comparison_interpolation_method(model_a,model_b,sm2,lambdas,valid_loader4,loss_fn,'satt')
-
-interpolate_models_slerp(model_a, model_b, sm2, lambdas,valid_loader4)
-
 """# Procrustes
 
 ## Procrustes su attivazioni
