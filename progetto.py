@@ -197,7 +197,7 @@ def get_multiple_fc_activations(model, layer_names, dataloader, max_batches=5):
 
     return Z_dict
 
-def comparison_interpolation_method(model_a,model_b,perm_model,lambdas,valid_dl,loss_fn,stringa):
+def comparison_interpolation_method(model_a,model_b,perm_model,lambdas,valid_dl,loss_fn,stringa,numero):
     val_losses_ab ,acc_ab= [],[]
     val_losses_ap ,acc_ap= [],[]
     for lam in lambdas:
@@ -210,27 +210,27 @@ def comparison_interpolation_method(model_a,model_b,perm_model,lambdas,valid_dl,
         loss_p,acc_p = evaluate_loss(interpolated_p, valid_dl, loss_fn)
         acc_ap.append(acc_p)
         val_losses_ap.append(loss_p)
-
-    fig, axs = plt.subplots(1, 2, figsize=(14, 6))
-
-    axs[0].plot(lambdas, val_losses_ab, marker='o', label="Naive A ↔ B")
-    axs[0].plot(lambdas, val_losses_ap, marker='s', label=stringa)
-    axs[0].set_xlabel("λ (interpolation factor)")
-    axs[0].set_ylabel("Validation Loss")
-    axs[0].set_title("Validation Loss - Interpolation Between Models")
-    axs[0].grid(True)
-    axs[0].legend()
-
-    axs[1].plot(lambdas, acc_ab, marker='o', label=" Naive A ↔ B")
-    axs[1].plot(lambdas, acc_ap, marker='s', label=stringa)
-    axs[1].set_xlabel("λ (interpolation factor)")
-    axs[1].set_ylabel("Accuracy")
-    axs[1].set_title("Accuracy - Interpolation Between Models")
-    axs[1].grid(True)
-    axs[1].legend()
-
-    plt.tight_layout()
-    plt.show()
+    if numero=='1':
+        fig, axs = plt.subplots(1, 2, figsize=(14, 6))
+    
+        axs[0].plot(lambdas, val_losses_ab, marker='o', label="Naive A ↔ B")
+        axs[0].plot(lambdas, val_losses_ap, marker='s', label=stringa)
+        axs[0].set_xlabel("λ (interpolation factor)")
+        axs[0].set_ylabel("Validation Loss")
+        axs[0].set_title("Validation Loss - Interpolation Between Models")
+        axs[0].grid(True)
+        axs[0].legend()
+    
+        axs[1].plot(lambdas, acc_ab, marker='o', label=" Naive A ↔ B")
+        axs[1].plot(lambdas, acc_ap, marker='s', label=stringa)
+        axs[1].set_xlabel("λ (interpolation factor)")
+        axs[1].set_ylabel("Accuracy")
+        axs[1].set_title("Accuracy - Interpolation Between Models")
+        axs[1].grid(True)
+        axs[1].legend()
+    
+        plt.tight_layout()
+        plt.show()
 
     return val_losses_ap ,acc_ap
 
