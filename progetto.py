@@ -270,11 +270,10 @@ def permute_activations(model_a, model_b, layer_names, valid_dl):
     diz_res,diz_perm={},{}
     dizA = get_multiple_fc_activations(model_a, layer_names, valid_dl)
     dizB = get_multiple_fc_activations(model_b, layer_names, valid_dl)
-
+    P_prev=None
     for n,layer in enumerate(layer_names):
         Z_A = dizA[layer]
         Z_B = dizB[layer]
-        P_prev=None
         Player = compute_permutation_matrix(Z_A, Z_B)
         diz_res[layer]=residual_misalignment_error(Z_A, Z_B, Player)
 
