@@ -434,7 +434,7 @@ def permutation_matrix(perm):
         P[i, perm[i]] = 1
     return P
 
-def create_dict( perm,layer_names=['fc1','fc2','fc3'],):
+def create_dict( perm,layer_names=['fc1','fc2','fc3']):
     permutazioni=[permutation_matrix(p) for p in perm.values()]
     diz_perm={}
     for i,layer in enumerate(layer_names):
